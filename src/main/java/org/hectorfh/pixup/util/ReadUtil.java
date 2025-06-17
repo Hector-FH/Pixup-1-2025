@@ -2,11 +2,17 @@ package org.hectorfh.pixup.util;
 
 import java.util.Scanner;
 
-public class ReadUtil
-{
+public class ReadUtil {
+
     private Scanner scanner;
     private static ReadUtil readUtil;
-    public ReadUtil() {
+
+    private ReadUtil() {
+        scanner = new Scanner(System.in);
+    }
+
+    public Scanner getScanner() {
+        return scanner;
     }
 
     public static ReadUtil getInstance() {
@@ -16,36 +22,38 @@ public class ReadUtil
         return readUtil;
     }
 
-    public String leer() {
-        if (scanner == null) {
-            scanner = new Scanner(System.in);
-        }
-        return scanner.next();
+    public static String read() {
+        return getInstance().getScanner().nextLine();
     }
 
-    public Integer leerInt() {
+    public static Integer readInt() {
+        String valor = null;
         boolean flag = true;
+        Integer aux = null;
+
         while (flag) {
-            try {
-                return Integer.valueOf(leer());
-            } catch (NumberFormatException e) {
-                System.out.println("No es un entero");
-                System.out.println("Ingresa un entero");
+            valor = read();
+            if (valor != null && !valor.isEmpty()) {
+                try {
+                    aux = Integer.valueOf(valor);
+                    if (aux != null) {
+                        return aux;
+                    }
+                } catch (Exception e) {
+                }
             }
+            System.out.println("Valor incorrecto, intentelo nuevamente");
         }
         return null;
     }
 
-    /*public Double leerDouble() {
-        boolean flag = true;
-        while (flag) {
-            try {
-                return Double.valueOf(leer());
-            } catch (NumberFormatException e) {
-                System.out.println("No es un double");
-                System.out.println("Ingresa un double");
-            }
+    public static Integer string2Integer(String valor) {
+        try {
+            return Integer.valueOf(valor);
+        } catch (Exception e) {
         }
         return null;
-    }*/
+
+
+    }
 }
