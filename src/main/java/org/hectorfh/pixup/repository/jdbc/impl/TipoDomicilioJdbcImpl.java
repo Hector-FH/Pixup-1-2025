@@ -70,7 +70,7 @@ public class TipoDomicilioJdbcImpl extends Conexion<TipoDomicilio> implements Ti
     public boolean save(TipoDomicilio tipoDomicilio) {
 
         PreparedStatement preparedStatement = null;
-        String query = "INSERT INTO TBL_TIPO_DOMICILIO (DESCRIPCION,) VALUES (?)";
+        String query = "INSERT INTO TBL_TIPO_DOMICILIO (DESCRIPCION) VALUES (?)";
         int res = 0;
 
         try {
